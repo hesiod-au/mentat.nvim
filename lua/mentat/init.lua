@@ -45,12 +45,6 @@ M.open_terminal_mentat_selected_only = function(size)
     local timestamp = os.date('%y%m%d%H%M%S')
     local new_filename = 'snippet-' .. timestamp .. '.' .. original_extension
 
-    -- Get the details of the visual selection
-    -- local start_pos = vim.fn.getpos("'<")
-    -- local end_pos = vim.fn.getpos("'>")
-    -- local start_line = start_pos[2] - 1  -- Lua is 1-indexed, vim is 1-indexed, adjusting
-    -- local end_line = end_pos[2]   -- No adjustment needed for the end line
-
     -- Get the selected text from the original buffer
     vim.cmd('normal! y')
     local selected_text = vim.fn.getreg('"')

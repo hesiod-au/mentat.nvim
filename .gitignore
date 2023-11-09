@@ -41,3 +41,7 @@ luac.out
 
 # Neovim
 *.swp
+
+# Mentat, Python
+.venv
+
