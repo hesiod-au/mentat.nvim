@@ -76,18 +76,18 @@ M.open_terminal_mentat_selected_only = function(size, pre_cmd)
         vim.cmd('terminal ' .. pre_cmd ..';' .. ' mentat ' .. new_filename)
     else
        vim.cmd('terminal mentat ' .. new_filename)
-   end
+    end
     vim.cmd('startinsert')
 end
 
 M.init_keys = function()
-    -- if Config.options.mentat_keybind then
-    --     -- vim.api.nvim_set_keymap("n", Config.options.mentat_keybind, "<Cmd>lua require('mentat').open_terminal_mentat_all_files(" .. Config.options.mentat_start_width .. "," .. "'" .. Config.options.mentat_pre_cmd .. "'" .. ")<CR>", {silent = true})
-    --     -- vim.api.nvim_set_keymap("v", Config.options.mentat_keybind, "<Cmd>lua require('mentat').open_terminal_mentat_selected_only(" .. Config.options.mentat_start_width .. "," .. "'" .. Config.options.mentat_pre_cmd .. "'" .. ")<CR>", {silent = true})
+    if Config.options.mentat_keybind then
+        -- vim.api.nvim_set_keymap("n", Config.options.mentat_keybind, "<Cmd>lua require('mentat').open_terminal_mentat_all_files(" .. Config.options.mentat_start_width .. "," .. "'" .. Config.options.mentat_pre_cmd .. "'" .. ")<CR>", {silent = true})
+        -- vim.api.nvim_set_keymap("v", Config.options.mentat_keybind, "<Cmd>lua require('mentat').open_terminal_mentat_selected_only(" .. Config.options.mentat_start_width .. "," .. "'" .. Config.options.mentat_pre_cmd .. "'" .. ")<CR>", {silent = true})
 
-    --     -- vim.api.nvim_set_keymap("n", Config.options.mentat_keybind, "<Cmd>lua require('mentat').open_terminal_mentat_all_files(" .. Config.options.mentat_start_width .. ")<CR>", {silent = true})
-    --     -- vim.api.nvim_set_keymap("v", Config.options.mentat_keybind, "<Cmd>lua require('mentat').open_terminal_mentat_selected_only(" .. Config.options.mentat_start_width .. ")<CR>", {silent = true})
-    -- end
+        vim.api.nvim_set_keymap("n", Config.options.mentat_keybind, "<Cmd>lua require('mentat').open_terminal_mentat_all_files(" .. Config.options.mentat_start_width .. ")<CR>", {silent = true})
+        vim.api.nvim_set_keymap("v", Config.options.mentat_keybind, "<Cmd>lua require('mentat').open_terminal_mentat_selected_only(" .. Config.options.mentat_start_width .. ")<CR>", {silent = true})
+    end
 end
 
 M.setup = function(options)
