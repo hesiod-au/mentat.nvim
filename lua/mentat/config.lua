@@ -1,7 +1,7 @@
 local M = {}
 function M.defaults()
     local defaults = {
-        mentat_pre_cmd = ""
+        mentat_pre_cmd = "",
         mentat_keybind = "<C-m>", -- key combo string
         mentat_start_width = 0, --columns, nil for 50:50 split
     }
