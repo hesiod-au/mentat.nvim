@@ -33,7 +33,7 @@ M.open_terminal_mentat_all_files = function(size, pre_cmd)
         if pre_cmd ~= "" then
             vim.cmd('terminal')
             vim.fn.chansend(vim.b.terminal_job_id, pre_cmd .. '\n' )
-            vim.fn.chansend('mentat')
+            vim.fn.chansend(vim.b.terminal_job_id, 'mentat')
             vim.cmd('startinsert')
         else
             vim.cmd('terminal mentat ' .. _G.buf_result)
