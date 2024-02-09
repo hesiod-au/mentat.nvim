@@ -31,7 +31,10 @@ M.open_terminal_mentat_all_files = function(size, pre_cmd)
             vim.api.nvim_win_set_width(0, size)
         end
         if pre_cmd ~= "" then
-            vim.cmd('terminal ' .. pre_cmd ..';' .. ' mentat ' .. _G.buf_result)
+            vim.cmd('terminal')
+            vim.fn.chansend(vim.b.terminal_job_id, pre_cmd .. '\n' )
+            vim.fn.chansend('mentat')
+            vim.cmd('startinsert')
         else
             vim.cmd('terminal mentat ' .. _G.buf_result)
         end
@@ -73,9 +76,12 @@ M.open_terminal_mentat_selected_only = function(size, pre_cmd)
         vim.api.nvim_win_set_width(0, size)
     end
     if pre_cmd ~= "" then
-        vim.cmd('terminal ' .. pre_cmd ..';' .. ' mentat ' .. new_filename)
+            vim.cmd('terminal')
+            vim.fn.chansend(vim.b.terminal_job_id, pre_cmd .. '\n' )
+            vim.fn.chansend('mentat')
+            vim.cmd('startinsert')
     else
-       vim.cmd('terminal mentat ' .. new_filename)
+        vim.cmd('terminal mentat ' .. new_filename)
     end
     vim.cmd('startinsert')
 end
