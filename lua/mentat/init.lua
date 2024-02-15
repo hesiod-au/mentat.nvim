@@ -32,9 +32,11 @@ M.open_terminal_mentat_all_files = function(size, pre_cmd)
         end
         if pre_cmd ~= "" then
             vim.cmd('terminal')
+            vim.fn.chansend(vim.b.terminal_job_id, 'source .venv/bin/activate\n')
             vim.fn.chansend(vim.b.terminal_job_id, 'mentat ' .. _G.buf_result  ..'\n')
         else
             vim.cmd('terminal')
+            vim.fn.chansend(vim.b.terminal_job_id, 'source .venv/bin/activate\n')
             vim.fn.chansend(vim.b.terminal_job_id, pre_cmd .. '\n' )
             vim.fn.chansend(vim.b.terminal_job_id, 'mentat ' .. _G.buf_result  ..'\n')
         end
