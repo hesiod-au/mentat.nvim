@@ -33,12 +33,14 @@ M.open_terminal_mentat_all_files = function(size, pre_cmd)
         if pre_cmd ~= "" then
             vim.cmd('terminal')
             vim.fn.chansend(vim.b.terminal_job_id, 'source .venv/bin/activate\n')
-            vim.fn.chansend(vim.b.terminal_job_id, 'mentat ' .. _G.buf_result  ..'\n')
+            local command = Config.options.aider and 'aider' or 'mentat'
+            vim.fn.chansend(vim.b.terminal_job_id, command .. ' ' .. _G.buf_result  ..'\n')
         else
             vim.cmd('terminal')
             vim.fn.chansend(vim.b.terminal_job_id, 'source .venv/bin/activate\n')
             vim.fn.chansend(vim.b.terminal_job_id, pre_cmd .. '\n' )
-            vim.fn.chansend(vim.b.terminal_job_id, 'mentat ' .. _G.buf_result  ..'\n')
+            local command = Config.options.aider and 'aider' or 'mentat'
+            vim.fn.chansend(vim.b.terminal_job_id, command .. ' ' .. _G.buf_result  ..'\n')
         end
         vim.cmd('startinsert')
     end
@@ -80,10 +82,12 @@ M.open_terminal_mentat_selected_only = function(size, pre_cmd)
     if pre_cmd ~= "" then
             vim.cmd('terminal')
             vim.fn.chansend(vim.b.terminal_job_id, pre_cmd .. '\n' )
-            vim.fn.chansend(vim.b.terminal_job_id, 'mentat\n')
+            local command = Config.options.aider and 'aider' or 'mentat'
+            vim.fn.chansend(vim.b.terminal_job_id, command .. '\n')
             vim.cmd('startinsert')
     else
-        vim.cmd('terminal mentat ' .. new_filename)
+        local command = Config.options.aider and 'aider' or 'mentat'
+        vim.cmd('terminal ' .. command .. ' ' .. new_filename)
     end
     vim.cmd('startinsert')
 end
