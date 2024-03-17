@@ -101,11 +101,38 @@ M.init_keys = function()
         -- vim.api.nvim_set_keymap("v", Config.options.mentat_keybind, "<Cmd>lua require('mentat').open_terminal_mentat_selected_only(" .. Config.options.mentat_start_width .. ")<CR>", {silent = true})
     end
     if Config.options.aider then
-        vim.api.nvim_set_keymap("n", "<C-,>", "<Cmd>lua require('mentat').open_aider_voice()<CR>", {silent = true})
+        vim.api.nvim_set_keymap("n", "<C-,>", "<Cmd>lua require('mentat').open_terminal_aider_voice()<CR>", {silent = true})
     end
 end
 
-M.open_aider_voice = function()
+M.open_terminal_aider_voice = function()
+    local buffers = vim.api.nvim_list_bufs()
+    local active_buffers = {}
+
+    for _, buf in ipairs(buffers) do
+        local is_loaded = vim.api.nvim_buf_is_loaded(buf)
+        local is_listed = vim.fn.getbufvar(buf, '&buflisted') == 1
+        local is_hidden = vim.fn.bufwinid(buf) == -1
+
+        if is_loaded and is_listed and not is_hidden then
+            local name = vim.api.nvim_buf_get_name(buf)
+            if name ~= "" then
+                table.insert(active_buffers, vim.fn.shellescape(name))
+            end
+        end
+    end
+    if #active_buffers == 0 then
+        print("No active buffers found.")
+    else
+        _G.buf_result = table.concat(active_buffers, " ")
+        print("Active buffers: " .. _G.buf_result)
+        vim.cmd('vsplit')
+        vim.cmd('wincmd l')
+        vim.cmd('terminal')
+        vim.fn.chansend(vim.b.terminal_job_id, 'aider ' .. _G.buf_result .. '\n')
+        vim.fn.chansend(vim.b.terminal_job_id, '/voice\n')
+        vim.cmd('startinsert')
+    end
     vim.cmd('vsplit')
     vim.cmd('wincmd l')
     vim.cmd('terminal')
