@@ -4,6 +4,7 @@ function M.defaults()
         mentat_pre_cmd = "",
         mentat_keybind = "<C-m>", -- key combo string
         mentat_start_width = 0, --columns, nil for 50:50 split
+        aider = false, -- boolean to toggle aider functionality
     }
     return defaults
 end
