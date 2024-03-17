@@ -100,6 +100,18 @@ M.init_keys = function()
         -- vim.api.nvim_set_keymap("n", Config.options.mentat_keybind, "<Cmd>lua require('mentat').open_terminal_mentat_all_files(" .. Config.options.mentat_start_width .. ")<CR>", {silent = true})
         -- vim.api.nvim_set_keymap("v", Config.options.mentat_keybind, "<Cmd>lua require('mentat').open_terminal_mentat_selected_only(" .. Config.options.mentat_start_width .. ")<CR>", {silent = true})
     end
+    if Config.options.aider then
+        vim.api.nvim_set_keymap("n", "<C-,>", "<Cmd>lua require('mentat').open_aider_voice()<CR>", {silent = true})
+    end
+end
+
+M.open_aider_voice = function()
+    vim.cmd('vsplit')
+    vim.cmd('wincmd l')
+    vim.cmd('terminal')
+    vim.fn.chansend(vim.b.terminal_job_id, 'aider\n')
+    vim.fn.chansend(vim.b.terminal_job_id, '/voice\n')
+    vim.cmd('startinsert')
 end
 
 M.setup = function(options)
