@@ -45,3 +45,4 @@ luac.out
 # Mentat, Python
 .venv
 
+.aider*
